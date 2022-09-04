@@ -1,0 +1,23 @@
+#game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  grid-row-template: repeat(5, 1fr);
+}
+.box {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 5px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
