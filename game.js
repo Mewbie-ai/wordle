@@ -1,4 +1,5 @@
 getWord();
+
 setup();
 function setup() {
   // create the variables
@@ -18,12 +19,10 @@ function setup() {
   window.addEventListener("keydown", (event) => {
     let regexString = "^[a-zA-Z]$";
     if (event.key.match(regexString)) {
-      if (event.key != "Enter" && event.key != "Backspace") {
-        if (col < 5) {
-          console.log(event.key);
-          updateBoard(board, event.key, row, col);
-          col++;
-        }
+      var x = event.key.toLowerCase();
+      if (col < 5) {
+        updateBoard(board, x, row, col);
+        col++;
       }
     }
     if (event.key == "Enter") {
@@ -104,6 +103,3 @@ function matchWord(ans, word, row) {
     }
   }
 }
-/* bugs
-1. board not updating on backspace
-*/
