@@ -1,5 +1,4 @@
 getWord();
-
 setup();
 function setup() {
   // create the variables
@@ -13,7 +12,7 @@ function setup() {
   ];
   let row = 0;
   let col = 0;
-  randomWord = ["quack"];
+  let randomWord = ["quack"];
   createUI();
 
   window.addEventListener("keydown", (event) => {
@@ -39,7 +38,7 @@ function setup() {
   });
 }
 function createUI() {
-  game = document.getElementById("game");
+  const game = document.getElementById("game");
   for (let i = 0; i < 6; i++) {
     let row = document.createElement("row");
     row.className = "row";
@@ -72,8 +71,6 @@ function updateBoard(board, char, row, col) {
 function matchWord(ans, word, row) {
   ans = ans[0].split("");
   word = word;
-  console.log(ans);
-  console.log(word);
   if (ans === word) {
     alert("yu win");
   }
