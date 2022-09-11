@@ -12,7 +12,7 @@ function setup() {
   ];
   let row = 0;
   let col = 0;
-  let randomWord = ["quack"];
+  let randomWord = "quack";
   createUI();
 
   window.addEventListener("keydown", (event) => {
@@ -26,6 +26,10 @@ function setup() {
     }
     if (event.key == "Enter") {
       if (col < 5) return;
+      fetch("https://test-michael-api.nathanadhitya.workers.dev", {
+        method: "POST", 
+        body: JSON.stringify({encryptedWord: randomWord, guess: board[row].join("")}),
+      });
       matchWord(randomWord, board[row], row);
       row++;
       col = 0;
@@ -54,9 +58,11 @@ function createUI() {
   }
 }
 function getWord() {
-  let word = fetch("https://random-word-api.herokuapp.com/word?number=1&length=5");
+  let word = fetch("https://test-michael-api.nathanadhitya.workers.dev");
   word.then((response) => {
     response.json().then((data) => {
+      /** @type {string[]} */
+      console.log(data);
       randomWord = data;
     });
   });
@@ -66,37 +72,34 @@ function updateBoard(board, char, row, col) {
     board[row][col] = char;
   }
   document.getElementById("game" + row + col).innerHTML = char;
-  console.log(board);
 }
-function matchWord(ans, word, row) {
-  ans = ans[0].split("");
-  word = word;
-  if (ans === word) {
-    alert("yu win");
-  }
-  for (let i = 0; i < 5; i++) {
-    document.getElementById("game" + row + i).style.backgroundColor = "red";
-  }
-  for (let i = 0; i < 5; i++) {
-    if (word[0] === ans[i]) {
-      document.getElementById("game" + row + 0).style.backgroundColor = "yellow";
-    }
-    if (word[1] === ans[i]) {
-      document.getElementById("game" + row + 1).style.backgroundColor = "yellow";
-    }
-    if (word[2] === ans[i]) {
-      document.getElementById("game" + row + 2).style.backgroundColor = "yellow";
-    }
-    if (word[3] === ans[i]) {
-      document.getElementById("game" + row + 3).style.backgroundColor = "yellow";
-    }
-    if (word[4] === ans[i]) {
-      document.getElementById("game" + row + 4).style.backgroundColor = "yellow";
-    }
-  }
-  for (let i = 0; i < 5; i++) {
-    if (word[i] === ans[i]) {
-      document.getElementById("game" + row + i).style.backgroundColor = "green";
-    }
-  }
-}
+// function matchWord(ans, word, row) {
+//   if (ans === word) {
+//     alert("yu win");
+//   }
+//   for (let i = 0; i < 5; i++) {
+//     document.getElementById("game" + row + i).style.backgroundColor = "red";
+//   }
+//   for (let i = 0; i < 5; i++) {
+//     if (word[0] === ans[i]) {
+//       document.getElementById("game" + row + 0).style.backgroundColor = "yellow";
+//     }
+//     if (word[1] === ans[i]) {
+//       document.getElementById("game" + row + 1).style.backgroundColor = "yellow";
+//     }
+//     if (word[2] === ans[i]) {
+//       document.getElementById("game" + row + 2).style.backgroundColor = "yellow";
+//     }
+//     if (word[3] === ans[i]) {
+//       document.getElementById("game" + row + 3).style.backgroundColor = "yellow";
+//     }
+//     if (word[4] === ans[i]) {
+//       document.getElementById("game" + row + 4).style.backgroundColor = "yellow";
+//     }
+//   }
+//   for (let i = 0; i < 5; i++) {
+//     if (word[i] === ans[i]) {
+//       document.getElementById("game" + row + i).style.backgroundColor = "green";
+//     }
+//   }
+// }
